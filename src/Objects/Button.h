@@ -10,3 +10,4 @@ struct Button
 };
 
 void InitButton(Button& button, int texture, double x, double y, double width, double height);
+void DrawButton(Button button);
