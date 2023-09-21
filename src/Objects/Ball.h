@@ -2,8 +2,9 @@
 
 struct Ball
 {
+	int texture;
 	double x;
 	double y;
-	double radius;
-	int numVertices;
+	double width;
+	double height;
 };
