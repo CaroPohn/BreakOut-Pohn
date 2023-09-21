@@ -1,6 +1,9 @@
 #include "Menu.h"
 #include "sl.h"
 #include "Screen.h"
+#include <iostream>
+
+using namespace std;
 
 int backTexture;
 int playButtonTexture;
@@ -53,11 +56,16 @@ void DrawMenu()
 	slRender();
 }
 
-void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton)
+void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton, Scenes& scene)
 {
 	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), playButton))
 	{
 		playButton.isSelected = true;
+
+		if (CheckMouseInput(playButton))
+		{
+			scene = Scenes::Play;
+		}
 	}
 	else
 		playButton.isSelected = false;
@@ -65,6 +73,10 @@ void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, B
 	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), rulesButton))
 	{
 		rulesButton.isSelected = true;
+		if (CheckMouseInput(rulesButton))
+		{
+			scene = Scenes::Rules;
+		}
 	}
 	else
 		rulesButton.isSelected = false;
@@ -72,6 +84,10 @@ void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, B
 	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), creditsButton))
 	{
 		creditsButton.isSelected = true;
+		if (CheckMouseInput(creditsButton))
+		{
+			scene = Scenes::Credits;
+		}
 	}
 	else
 		creditsButton.isSelected = false;
@@ -79,6 +95,10 @@ void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, B
 	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), exitButton))
 	{
 		exitButton.isSelected = true;
+		if (CheckMouseInput(exitButton))
+		{
+			scene = Scenes::Exit;
+		}
 	}
 	else
 		exitButton.isSelected = false;
@@ -91,6 +111,6 @@ void RunMenu(Scenes& scene, bool isNewScene)
 		InitMenu();
 	}
 
-	MenuInput(playButton, rulesButton, creditsButton, exitButton);
+	MenuInput(playButton, rulesButton, creditsButton, exitButton, scene);
 	DrawMenu();
 }

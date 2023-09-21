@@ -29,3 +29,8 @@ bool CheckCollisionButtonMouse(int mouseX, int mouseY, Button button)
 {
 	return ((mouseX >= button.x - button.width/2) && (mouseX < (button.x + button.width/2)) && (mouseY >= button.y - button.height/2) && (mouseY < (button.y + button.height/2)));
 }
+
+bool CheckMouseInput(Button button)
+{
+	return (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), button) && (slGetMouseButton(SL_MOUSE_BUTTON_1) != 0));
+}
