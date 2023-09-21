@@ -138,11 +138,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="ProgramLoop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="ProgramLoop.h" />
     <ClInclude Include="Scenes.h" />
