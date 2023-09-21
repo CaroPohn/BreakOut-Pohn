@@ -52,3 +52,45 @@ void DrawMenu()
 
 	slRender();
 }
+
+void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton)
+{
+	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), playButton))
+	{
+		playButton.isSelected = true;
+	}
+	else
+		playButton.isSelected = false;
+
+	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), rulesButton))
+	{
+		rulesButton.isSelected = true;
+	}
+	else
+		rulesButton.isSelected = false;
+
+	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), creditsButton))
+	{
+		creditsButton.isSelected = true;
+	}
+	else
+		creditsButton.isSelected = false;
+
+	if (CheckCollisionButtonMouse(slGetMouseX(), slGetMouseY(), exitButton))
+	{
+		exitButton.isSelected = true;
+	}
+	else
+		exitButton.isSelected = false;
+}
+
+void RunMenu(Scenes& scene, bool isNewScene)
+{
+	if (isNewScene)
+	{
+		InitMenu();
+	}
+
+	MenuInput(playButton, rulesButton, creditsButton, exitButton);
+	DrawMenu();
+}

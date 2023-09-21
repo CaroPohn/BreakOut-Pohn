@@ -16,13 +16,13 @@ void GameLoop()
 
 	do
 	{
-		/*isNewScene = (scene != previousScene);
-		previousScene = scene;*/
+		isNewScene = (scene != previousScene);
+		previousScene = scene;
 
 		switch (scene)
 		{
 		case Scenes::Menu:
-			DrawMenu();
+			RunMenu(scene, isNewScene);
 			break;
 
 		case Scenes::Play:

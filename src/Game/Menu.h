@@ -1,6 +1,9 @@
 #pragma once
 #include "Objects/Button.h"
+#include "Scenes.h"
 
 void InitMenu();
 void InitMenuButtons(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton);
 void DrawMenu();
+void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton);
+void RunMenu(Scenes& scene, bool isNewScene);
