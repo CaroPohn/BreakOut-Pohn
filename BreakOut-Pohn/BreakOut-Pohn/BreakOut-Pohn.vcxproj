@@ -111,7 +111,8 @@
       </Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015" "$(OutDir)"</Command>
+      <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015" "$(OutDir)"
+xcopy /y "$(SolutionDir)assets" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,6 +130,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015" "$(OutDir)"
+xcopy /y "$(SolutionDir)assets" "$(OutDir)"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
