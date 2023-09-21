@@ -8,3 +8,5 @@ struct Button
 	double width;
 	double height;
 };
+
+void InitButton();
