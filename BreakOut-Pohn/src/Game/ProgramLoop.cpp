@@ -32,6 +32,10 @@ void GameLoop()
 			
 			break;
 
+		case Scenes::Credits:
+
+			break;
+
 		case Scenes::Exit:
 			break;
 
