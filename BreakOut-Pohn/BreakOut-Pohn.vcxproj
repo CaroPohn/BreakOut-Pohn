@@ -23,13 +23,14 @@
     <ClCompile Include="..\src\Game\ProgramLoop.cpp" />
     <ClCompile Include="..\src\Game\Screen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="..\src\Objects\Button.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game\Menu.h" />
     <ClInclude Include="..\src\Game\ProgramLoop.h" />
     <ClInclude Include="..\src\Game\Scenes.h" />
     <ClInclude Include="..\src\Game\Screen.h" />
+    <ClInclude Include="..\src\Game\Utilities.h" />
     <ClInclude Include="..\src\Objects\Ball.h" />
     <ClInclude Include="..\src\Objects\Brick.h" />
     <ClInclude Include="..\src\Objects\Button.h" />

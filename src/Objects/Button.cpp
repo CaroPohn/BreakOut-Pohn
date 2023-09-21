@@ -14,3 +14,8 @@ void DrawButton(Button button)
 {
 	slSprite(button.texture, button.x, button.y, button.width, button.height);
 }
+
+bool CheckCollisionButtonMouse()
+{
+
+}
