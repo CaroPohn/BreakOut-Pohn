@@ -3,15 +3,22 @@
 #include "Screen.h"
 
 int backTexture;
+int buttonTexture;
+
+static Button playButton;
+static Button rulesButton;
+static Button creditsButton;
+static Button exitButton;
 
 void InitMenu()
 {
 	backTexture = slLoadTexture("../assets/menuback.png");
 }
 
-void InitMenuButtons()
+void InitMenuButtons(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton)
 {
-	
+	buttonTexture = slLoadTexture("../assets/button.png");
+	double 
 }
 
 void DrawMenu()
