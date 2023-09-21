@@ -1,27 +1,28 @@
 #include "ProgramLoop.h"
+#include "Screen.h"
+#include "Menu.h"
 
 static Scenes scene;
 
 void GameLoop()
 {
-	const int screenWidth = 1200;
-	const int screenHeight = 900;	
-
-	slWindow(screenWidth, screenHeight, "BreakOut", false);
+	slWindow(GetScreenWidth(), GetScreenHeight(), "Slime Hunter", false);
 
 	scene = Scenes::Menu;
 	Scenes previousScene = Scenes::Exit;
 	bool isNewScene;
 
+	InitMenu();
+
 	do
 	{
-		isNewScene = (scene != previousScene);
-		previousScene = scene;
+		/*isNewScene = (scene != previousScene);
+		previousScene = scene;*/
 
 		switch (scene)
 		{
 		case Scenes::Menu:
-			
+			DrawMenu();
 			break;
 
 		case Scenes::Play:
@@ -42,7 +43,7 @@ void GameLoop()
 		default:
 			break;
 		}
-	} while (!slShouldClose && !slGetKey(SL_KEY_ESCAPE) && scene != Scenes::Exit);
+	} while (!slShouldClose() && !slGetKey(SL_KEY_ESCAPE) && scene != Scenes::Exit);
 
 	slClose();
 }

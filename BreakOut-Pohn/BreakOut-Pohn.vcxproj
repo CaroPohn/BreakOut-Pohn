@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClCompile Include="..\src\Game\Menu.cpp" />
     <ClCompile Include="..\src\Game\ProgramLoop.cpp" />
+    <ClCompile Include="..\src\Game\Screen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game\Menu.h" />
     <ClInclude Include="..\src\Game\ProgramLoop.h" />
     <ClInclude Include="..\src\Game\Scenes.h" />
+    <ClInclude Include="..\src\Game\Screen.h" />
     <ClInclude Include="..\src\Objects\Ball.h" />
     <ClInclude Include="..\src\Objects\Brick.h" />
     <ClInclude Include="..\src\Objects\Button.h" />
@@ -107,12 +109,14 @@
       <AdditionalDependencies>sigil.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>
-      </Command>
+      <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015\dll" "$(OutDir)"
+cd "$(OutDir)"
+md "assets"
+xcopy /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015" "$(OutDir)"
-xcopy /y "$(SolutionDir)assets" "$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -131,9 +135,15 @@ xcopy /y "$(SolutionDir)assets" "$(OutDir)"</Command>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015" "$(OutDir)"
-xcopy /y "$(SolutionDir)assets" "$(OutDir)"</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015\dll" "$(OutDir)"
+cd "$(OutDir)"
+md "assets"
+xcopy /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
