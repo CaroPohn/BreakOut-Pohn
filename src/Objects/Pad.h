@@ -7,6 +7,7 @@ struct Pad
 	double y;
 	double width;
 	double height;
+	float speed;
 	int lives;
 };
 

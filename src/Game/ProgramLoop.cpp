@@ -44,7 +44,10 @@ void GameLoop()
 		default:
 			break;
 		}
-	} while (!slShouldClose() && !slGetKey(SL_KEY_ESCAPE) && scene != Scenes::Exit);
+
+		slRender();
+
+	} while (!slShouldClose() && (!slGetKey(81) || !slGetKey(113)) && scene != Scenes::Exit);
 
 	slClose();
 }

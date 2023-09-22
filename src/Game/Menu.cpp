@@ -49,8 +49,6 @@ void DrawMenu()
 	DrawButton(rulesButton);
 	DrawButton(creditsButton);
 	DrawButton(exitButton);
-
-	slRender();
 }
 
 void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton, Scenes& scene)
