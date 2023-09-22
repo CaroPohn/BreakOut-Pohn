@@ -25,7 +25,8 @@
     <ClCompile Include="..\src\Game\Screen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Objects\Button.cpp" />
-    <ClCompile Include="Pad.cpp" />
+    <ClCompile Include="..\src\Objects\Pad.cpp" />
+    <ClCompile Include="Pause.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game\Menu.h" />
@@ -38,6 +39,7 @@
     <ClInclude Include="..\src\Objects\Brick.h" />
     <ClInclude Include="..\src\Objects\Button.h" />
     <ClInclude Include="..\src\Objects\Pad.h" />
+    <ClInclude Include="Pause.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

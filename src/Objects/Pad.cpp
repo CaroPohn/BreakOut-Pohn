@@ -13,6 +13,7 @@ void InitPad(Pad& player, double width, double height)
 	player.y = GetScreenHeight() / 4 - 30;
 	player.width = width;
 	player.height = height;
+	player.speed = 1100.0f;
 	player.lives = 3;
 }
 

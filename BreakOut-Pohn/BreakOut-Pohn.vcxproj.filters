@@ -33,7 +33,10 @@
     <ClCompile Include="..\src\Game\Play.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Pad.cpp">
+    <ClCompile Include="Pause.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Pad.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -66,6 +69,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Game\Play.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="Pause.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
