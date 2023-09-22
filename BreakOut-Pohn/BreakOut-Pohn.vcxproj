@@ -117,14 +117,14 @@
       <AdditionalDependencies>sigil.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
       <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015\dll" "$(OutDir)"
 cd "$(OutDir)"
 md "assets"
-xcopy /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>
-      </Command>
+xcopy /y "$(ProjectDir)assets" "$(OutDir)assets"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
