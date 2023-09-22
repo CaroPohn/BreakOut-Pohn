@@ -6,7 +6,7 @@ int padTexture;
 
 void InitPad(Pad& player, double width, double height)
 {
-	padTexture = slLoadTexture("../assets/bar.png");
+	padTexture = slLoadTexture("assets/bar.png");
 	
 	player.texture = padTexture;
 	player.x = GetScreenWidth() / 2;

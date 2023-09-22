@@ -15,3 +15,4 @@ struct Ball
 
 void InitBall(Ball& ball);
 void DrawBall(Ball ball);
+void BallMovement(Ball& ball);

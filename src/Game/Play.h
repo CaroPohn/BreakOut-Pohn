@@ -8,5 +8,6 @@ void CheckInput(Pad& player, bool& isPaused);
 void DrawGame();
 void PadScreenCollision(Pad& player);
 bool BallPadCollision(Pad player, Ball ball);
+void BallScreenCollision(Ball& ball);
 void UpdateGame();
 void RunGame(Scenes& scene, bool isNewScene);

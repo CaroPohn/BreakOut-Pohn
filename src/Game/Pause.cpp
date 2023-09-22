@@ -6,7 +6,7 @@ int pauseTexture;
 
 void InitPause(Pause& pause)
 {
-	pauseTexture = slLoadTexture("../assets/pause.png");
+	pauseTexture = slLoadTexture("assets/pause.png");
 
 	pause.texture = pauseTexture;
 	pause.x = GetScreenWidth() / 2;

@@ -15,16 +15,16 @@ static Button exitButton;
 
 void InitMenu()
 {
-	backTexture = slLoadTexture("../assets/menuback.png");
+	backTexture = slLoadTexture("assets/menuback.png");
 	InitMenuButtons(playButton, rulesButton, creditsButton, exitButton);
 }
 
 void InitMenuButtons(Button& playButton, Button& rulesButton, Button& creditsButton, Button& exitButton)
 {
-	playButtonTexture = slLoadTexture("../assets/playbutton.png");
-	rulesButtonTexture = slLoadTexture("../assets/rulesbutton.png");
-	creditsButtonTexture = slLoadTexture("../assets/creditsbutton.png");
-	exitButtonTexture = slLoadTexture("../assets/exitbutton.png");
+	playButtonTexture = slLoadTexture("assets/playbutton.png");
+	rulesButtonTexture = slLoadTexture("assets/rulesbutton.png");
+	creditsButtonTexture = slLoadTexture("assets/creditsbutton.png");
+	exitButtonTexture = slLoadTexture("assets/exitbutton.png");
 	const double buttonWidth = 250;
 	const double buttonHeight = 110;
 	double buttonXPos = GetScreenWidth() / 2;

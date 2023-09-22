@@ -11,7 +11,7 @@ static bool isPaused = false;
 
 void InitGame()
 {
-	backGameTexture = slLoadTexture("../assets/gameback.png");
+	backGameTexture = slLoadTexture("assets/gameback.png");
 
 	double playerWidth = 230;
 	double playerHeigth = 30;
@@ -70,12 +70,36 @@ bool BallPadCollision(Pad player, Ball ball)
 		playerBottomEdge <= ballTopEdge);
 }
 
+void BallScreenCollision(Ball& ball)
+{
+	if (ball.y + ball.height / 2 >= GetScreenHeight())
+	{
+		ball.y = GetScreenHeight() - ball.height / 2;
+		ball.dirY *= -1;
+	}
 
+	if (ball.y - ball.height / 2 <= 0)
+	{
+		ball.dirY *= -1;
+	}
+
+	if (ball.x + ball.width / 2 >= GetScreenWidth())
+	{
+		ball.dirX *= -1;
+	}
+
+	if (ball.x - ball.width / 2 <= 0)
+	{
+		ball.dirX *= -1;
+	}
+}
 
 void UpdateGame()
 {
 	CheckInput(player, isPaused);
 	PadScreenCollision(player);
+	BallMovement(ball);
+	BallScreenCollision(ball);
 }
 
 void RunGame(Scenes& scene, bool isNewScene)
