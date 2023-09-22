@@ -25,6 +25,7 @@
     <ClCompile Include="..\src\Game\Screen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Objects\Button.cpp" />
+    <ClCompile Include="Pad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game\Menu.h" />
