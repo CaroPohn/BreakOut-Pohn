@@ -1,6 +1,7 @@
 #include "Play.h"
 #include "Screen.h"
 #include "Game/Pause.h"
+#include <iostream>
 #include "sl.h"
 
 int backGameTexture;
@@ -70,16 +71,34 @@ bool BallPadCollision(Pad player, Ball ball)
 		playerBottomEdge <= ballTopEdge);
 }
 
+void BounceDirection(Pad player, Ball& ball)
+{
+	if (BallPadCollision(player, ball))
+	{
+
+		if (ball.y - ball.height / 2 < player.y + player.height / 2)
+		{
+			ball.y += player.y + player.height / 2 - ball.y;
+		}
+
+		if (ball.speed < 900.0f)
+			ball.speed *= 1.1f;
+		else
+			ball.speed *= 1.0f;
+
+		ball.dirY *= -1;
+
+		float collisionInX = (ball.x - (player.x + player.width / 2)) / (player.width / 2);
+
+		ball.dirX = std::sin(collisionInX);
+	}
+}
+
 void BallScreenCollision(Ball& ball)
 {
 	if (ball.y + ball.height / 2 >= GetScreenHeight())
 	{
 		ball.y = GetScreenHeight() - ball.height / 2;
-		ball.dirY *= -1;
-	}
-
-	if (ball.y - ball.height / 2 <= 0)
-	{
 		ball.dirY *= -1;
 	}
 
@@ -94,12 +113,23 @@ void BallScreenCollision(Ball& ball)
 	}
 }
 
+void RestLives(Pad& player, Ball ball)
+{
+	if (ball.y - ball.height / 2 <= 0)
+	{
+		player.lives -= 1;
+		InitBall(ball);
+	}
+}
+
 void UpdateGame()
 {
 	CheckInput(player, isPaused);
 	PadScreenCollision(player);
 	BallMovement(ball);
 	BallScreenCollision(ball);
+	BounceDirection(player, ball);
+	RestLives(player, ball);
 }
 
 void RunGame(Scenes& scene, bool isNewScene)
