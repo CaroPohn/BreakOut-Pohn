@@ -7,4 +7,8 @@ struct Pad
 	double y;
 	double width;
 	double height;
+	int lives;
 };
+
+void InitPad(Pad& player, double width, double height);
+void DrawPad(Pad player);
