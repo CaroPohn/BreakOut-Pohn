@@ -20,16 +20,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Game\Menu.cpp" />
+    <ClCompile Include="..\src\Game\Pause.cpp" />
     <ClCompile Include="..\src\Game\Play.cpp" />
     <ClCompile Include="..\src\Game\ProgramLoop.cpp" />
     <ClCompile Include="..\src\Game\Screen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Objects\Button.cpp" />
     <ClCompile Include="..\src\Objects\Pad.cpp" />
-    <ClCompile Include="Pause.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game\Menu.h" />
+    <ClInclude Include="..\src\Game\Pause.h" />
     <ClInclude Include="..\src\Game\Play.h" />
     <ClInclude Include="..\src\Game\ProgramLoop.h" />
     <ClInclude Include="..\src\Game\Scenes.h" />
@@ -39,7 +40,6 @@
     <ClInclude Include="..\src\Objects\Brick.h" />
     <ClInclude Include="..\src\Objects\Button.h" />
     <ClInclude Include="..\src\Objects\Pad.h" />
-    <ClInclude Include="Pause.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -1,4 +1,5 @@
 #pragma once
+#include "Scenes.h"
 
 struct Pause
 {
@@ -8,3 +9,8 @@ struct Pause
 	double width;
 	double height;
 };
+
+void InitPause(Pause& pause);
+void DrawPause(Pause pause);
+void InputPause(Scenes& scene, bool& isPaused);
+void RunPause(Pause pause, Scenes& scene, bool& isPaused);
