@@ -1,6 +1,7 @@
 #include "ProgramLoop.h"
 #include "Screen.h"
 #include "Menu.h"
+#include "Game/Play.h"
 
 static Scenes scene;
 
@@ -26,7 +27,7 @@ void GameLoop()
 			break;
 
 		case Scenes::Play:
-			
+			RunGame(scene, isNewScene);
 			break;
 
 		case Scenes::Rules:

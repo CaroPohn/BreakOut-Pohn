@@ -1,9 +1,6 @@
 #include "Menu.h"
 #include "sl.h"
 #include "Screen.h"
-#include <iostream>
-
-using namespace std;
 
 int backTexture;
 int playButtonTexture;
