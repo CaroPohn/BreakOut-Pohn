@@ -2,6 +2,7 @@
 #include "Screen.h"
 #include "Menu.h"
 #include "Game/Play.h"
+#include <iostream>
 
 static Scenes scene;
 

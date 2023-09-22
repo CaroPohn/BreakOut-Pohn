@@ -5,6 +5,7 @@
 
 int backGameTexture;
 static Pad player;
+static Ball ball;
 static Pause pause;
 static bool isPaused = false;
 
@@ -17,6 +18,7 @@ void InitGame()
 
 	InitPad(player, playerWidth, playerHeigth);
 	InitPause(pause);
+	InitBall(ball);
 }
 
 void CheckInput(Pad& player, bool& isPaused)
@@ -34,6 +36,7 @@ void DrawGame()
 {
 	slSprite(backGameTexture, GetScreenWidth() / 2, GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight());
 	DrawPad(player);
+	DrawBall(ball);
 }
 
 void PadScreenCollision(Pad& player)
@@ -48,6 +51,26 @@ void PadScreenCollision(Pad& player)
 		player.x = GetScreenWidth() - player.width / 2;
 	}
 }
+
+bool BallPadCollision(Pad player, Ball ball)
+{
+	float playerRightEdge = player.x + player.width / 2;
+	float playerLeftEdge = player.x - player.width / 2;
+	float playerTopEdge = player.y + player.height / 2;
+	float playerBottomEdge = player.y - player.height / 2;
+
+	float ballRightEdge = ball.x + ball.width / 2;
+	float ballLeftEdge = ball.x - ball.width / 2;
+	float ballTopEdge = ball.y + ball.height / 2;
+	float ballBottomEdge = ball.y - ball.height / 2;
+
+	return (playerRightEdge >= ballLeftEdge &&
+		playerLeftEdge <= ballRightEdge &&
+		playerTopEdge >= ballBottomEdge &&
+		playerBottomEdge <= ballTopEdge);
+}
+
+
 
 void UpdateGame()
 {
