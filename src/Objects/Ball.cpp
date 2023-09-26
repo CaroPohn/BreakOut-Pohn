@@ -1,5 +1,6 @@
 #include "Ball.h"
 #include "Game/Screen.h"
+#include <iostream>
 #include "sl.h"
 
 int ballTexture;
@@ -28,4 +29,23 @@ void BallMovement(Ball& ball)
 {
 	ball.x += ball.speed * ball.dirX * slGetDeltaTime();
 	ball.y += ball.speed * ball.dirY * slGetDeltaTime();
+}
+
+void ResetBall(Ball& ball, Pad& player)
+{
+	ball.x = player.x;
+	ball.y = GetScreenHeight() / 4 + ball.height / 2 - 15;
+	ball.speed = ball.DEFAULT_SPEED;
+	
+	float randDirX = ((rand() % 19) - 9) * 0.1f;
+	float randDirY = (rand() % 9) * 0.1f;
+
+	if (randDirX >= 0 && randDirX < 0.4f)
+		randDirX = 0.7f;
+
+	else if (randDirX < 0 && randDirX > -0.4f)
+		randDirX = -0.7f;
+
+	if (randDirY >= 0 && randDirY < 0.3f)
+		randDirY = 0.7f;
 }

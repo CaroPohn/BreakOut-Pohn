@@ -24,8 +24,8 @@ void InitGame()
 
 void CheckInput(Pad& player, bool& isPaused)
 {
-	if(slGetKey(68) || slGetKey(100)) player.x += player.speed * slGetDeltaTime();
-	if(slGetKey(65) || slGetKey(97)) player.x -= player.speed * slGetDeltaTime();
+	if(slGetKey(SL_KEY_RIGHT)) player.x += player.speed * slGetDeltaTime();
+	if(slGetKey(SL_KEY_LEFT)) player.x -= player.speed * slGetDeltaTime();
 
 	if (slGetKey(SL_KEY_ESCAPE))
 	{
@@ -75,10 +75,9 @@ void BounceDirection(Pad player, Ball& ball)
 {
 	if (BallPadCollision(player, ball))
 	{
-
 		if (ball.y - ball.height / 2 < player.y + player.height / 2)
 		{
-			ball.y += player.y + player.height / 2 - ball.y;
+			ball.y += player.y + player.height / 2 - ball.y + ball.height / 2;
 		}
 
 		if (ball.speed < 900.0f)
@@ -89,8 +88,7 @@ void BounceDirection(Pad player, Ball& ball)
 		ball.dirY *= -1;
 
 		float collisionInX = (ball.x - (player.x + player.width / 2)) / (player.width / 2);
-
-		ball.dirX = std::sin(collisionInX);
+		ball.dirX = std::cos(collisionInX);
 	}
 }
 
@@ -113,12 +111,12 @@ void BallScreenCollision(Ball& ball)
 	}
 }
 
-void RestLives(Pad& player, Ball ball)
+void RestLives(Pad& player, Ball& ball)
 {
 	if (ball.y - ball.height / 2 <= 0)
 	{
 		player.lives -= 1;
-		InitBall(ball);
+		ResetBall(ball, player);
 	}
 }
 

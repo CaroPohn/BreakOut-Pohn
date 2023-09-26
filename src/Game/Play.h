@@ -10,6 +10,6 @@ void PadScreenCollision(Pad& player);
 bool BallPadCollision(Pad player, Ball ball);
 void BounceDirection(Pad player, Ball& ball);
 void BallScreenCollision(Ball& ball);
-void RestLives(Pad& player, Ball ball);
+void RestLives(Pad& player, Ball& ball);
 void UpdateGame();
 void RunGame(Scenes& scene, bool isNewScene);
