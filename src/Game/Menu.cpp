@@ -7,6 +7,7 @@ int playButtonTexture;
 int rulesButtonTexture;
 int creditsButtonTexture;
 int exitButtonTexture;
+int menuMusic;
 
 static Button playButton;
 static Button rulesButton;
@@ -25,6 +26,8 @@ void InitMenuButtons(Button& playButton, Button& rulesButton, Button& creditsBut
 	rulesButtonTexture = slLoadTexture("assets/rulesbutton.png");
 	creditsButtonTexture = slLoadTexture("assets/creditsbutton.png");
 	exitButtonTexture = slLoadTexture("assets/exitbutton.png");
+	menuMusic = slLoadWAV("assets/menumusic.wav");
+
 	const double buttonWidth = 250;
 	const double buttonHeight = 110;
 	double buttonXPos = GetScreenWidth() / 2;
@@ -59,6 +62,7 @@ void MenuInput(Button& playButton, Button& rulesButton, Button& creditsButton, B
 
 		if (CheckMouseInput(playButton))
 		{
+			slSoundStopAll();
 			scene = Scenes::Play;
 		}
 	}
@@ -104,6 +108,7 @@ void RunMenu(Scenes& scene, bool isNewScene)
 	if (isNewScene)
 	{
 		InitMenu();
+		slSoundLoop(menuMusic);
 	}
 
 	MenuInput(playButton, rulesButton, creditsButton, exitButton, scene);

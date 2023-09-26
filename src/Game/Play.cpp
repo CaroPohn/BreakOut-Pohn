@@ -88,7 +88,7 @@ void BounceDirection(Pad player, Ball& ball)
 		ball.dirY *= -1;
 
 		float collisionInX = (ball.x - (player.x + player.width / 2)) / (player.width / 2);
-		ball.dirX = std::cos(collisionInX);
+		ball.dirX = std::cos(collisionInX); 
 	}
 }
 
