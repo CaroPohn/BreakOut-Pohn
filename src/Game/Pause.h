@@ -1,6 +1,8 @@
 #pragma once
 #include "Scenes.h"
 
+
+
 struct Pause
 {
 	int texture;

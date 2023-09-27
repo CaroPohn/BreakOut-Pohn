@@ -4,6 +4,7 @@
 #include "sl.h"
 
 int ballTexture;
+void RandDirection(Ball& ball);
 
 void InitBall(Ball& ball)
 {
@@ -16,8 +17,7 @@ void InitBall(Ball& ball)
 	ball.y = GetScreenHeight() / 4 + ball.height / 2 - 15;
 	ball.speed = ball.DEFAULT_SPEED;
 
-	ball.dirX = 1.0f;
-	ball.dirY = 1.0f;
+	RandDirection(ball);
 }
 
 void DrawBall(Ball ball)
@@ -31,12 +31,37 @@ void BallMovement(Ball& ball)
 	ball.y += ball.speed * ball.dirY * slGetDeltaTime();
 }
 
+void BallScreenCollision(Ball& ball)
+{
+	if (ball.y + ball.height / 2 >= GetScreenHeight())
+	{
+		ball.y = GetScreenHeight() - ball.height / 2;
+		ball.dirY *= -1;
+	}
+
+	if (ball.x + ball.width / 2 >= GetScreenWidth())
+	{
+		ball.x = GetScreenWidth() - ball.width / 2;
+		ball.dirX *= -1;
+	}
+
+	if (ball.x - ball.width / 2 <= 0)
+	{
+		ball.x = ball.width / 2;
+		ball.dirX *= -1;
+	}
+}
+
 void ResetBall(Ball& ball, Pad& player)
 {
 	ball.x = player.x;
 	ball.y = GetScreenHeight() / 4 + ball.height / 2 - 15;
 	ball.speed = ball.DEFAULT_SPEED;
-	
+	RandDirection(ball);
+}
+
+void RandDirection(Ball& ball)
+{
 	float randDirX = ((rand() % 19) - 9) * 0.1f;
 	float randDirY = (rand() % 9) * 0.1f;
 
@@ -48,4 +73,7 @@ void ResetBall(Ball& ball, Pad& player)
 
 	if (randDirY >= 0 && randDirY < 0.3f)
 		randDirY = 0.7f;
+
+	ball.dirX = randDirX;
+	ball.dirY = randDirY;
 }

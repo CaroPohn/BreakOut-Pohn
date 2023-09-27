@@ -8,7 +8,7 @@ struct Ball
 	double y;
 	double width;
 	double height;
-	const float DEFAULT_SPEED = 400.0f;
+	const float DEFAULT_SPEED = 500.0f;
 	float speed;
 	float dirX;
 	float dirY;
@@ -17,4 +17,5 @@ struct Ball
 void InitBall(Ball& ball);
 void DrawBall(Ball ball);
 void BallMovement(Ball& ball);
+void BallScreenCollision(Ball& ball);
 void ResetBall(Ball& ball, Pad& player);

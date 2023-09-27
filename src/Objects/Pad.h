@@ -12,4 +12,7 @@ struct Pad
 };
 
 void InitPad(Pad& player, double width, double height);
+void MovePadRight(Pad& player);
+void MovePadLeft(Pad& player);
+void PadScreenCollision(Pad& player);
 void DrawPad(Pad player);

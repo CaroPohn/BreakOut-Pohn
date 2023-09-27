@@ -13,6 +13,17 @@ const int TOTAL_BRICKS = 49;
 Brick bricks[TOTAL_BRICKS];
 static bool isPaused = false;
 
+void InitGame();
+void CheckInput(Pad& player, bool& isPaused);
+void DrawGame();
+void PadScreenCollision(Pad& player);
+bool BallPadCollision(Pad player, Ball ball);
+void BounceDirection(Pad player, Ball& ball);
+bool BallBrickCollision(Brick brick, Ball ball);
+void BallBrickChangeDirection(Ball& ball, Brick bricks[], int numBricks);
+void RestLives(Pad& player, Ball& ball);
+void UpdateGame();
+
 void InitGame()
 {
 	backGameTexture = slLoadTexture("assets/gameback.png");
@@ -28,13 +39,14 @@ void InitGame()
 
 void CheckInput(Pad& player, bool& isPaused)
 {
-	if(slGetKey(SL_KEY_RIGHT)) player.x += player.speed * slGetDeltaTime();
-	if(slGetKey(SL_KEY_LEFT)) player.x -= player.speed * slGetDeltaTime();
+	MovePadRight(player);
+	MovePadLeft(player);
 
 	if (slGetKey(SL_KEY_ESCAPE))
 	{
 		isPaused = !isPaused;
 	}
+
 }
 
 void DrawGame()
@@ -43,19 +55,6 @@ void DrawGame()
 	DrawPad(player);
 	DrawBall(ball);
 	DrawBricks(bricks, TOTAL_BRICKS);
-}
-
-void PadScreenCollision(Pad& player)
-{
-	if (player.x - player.width / 2 <= 0)
-	{
-		player.x = 0 + player.width / 2;
-	}
-
-	if (player.x + player.width / 2 >= GetScreenWidth())
-	{
-		player.x = GetScreenWidth() - player.width / 2;
-	}
 }
 
 bool BallPadCollision(Pad player, Ball ball)
@@ -85,34 +84,94 @@ void BounceDirection(Pad player, Ball& ball)
 			ball.y += player.y + player.height / 2 - ball.y + ball.height / 2;
 		}
 
-		if (ball.speed < 900.0f)
+		if(ball.speed < 600.0f)
 			ball.speed *= 1.1f;
 		else
 			ball.speed *= 1.0f;
 
 		ball.dirY *= -1;
 
-		float collisionInX = (ball.x - (player.x + player.width / 2)) / (player.width / 2);
-		ball.dirX = std::cos(collisionInX); 
+		float xCollisionPoint = (ball.x + ball.width / 2 - player.x) / player.width;
+		float amplitude = 3.5f;
+		ball.dirX = std::sinf(xCollisionPoint) * amplitude;
 	}
 }
 
-void BallScreenCollision(Ball& ball)
+bool BallBrickCollision(Brick brick, Ball ball)
 {
-	if (ball.y + ball.height / 2 >= GetScreenHeight())
-	{
-		ball.y = GetScreenHeight() - ball.height / 2;
-		ball.dirY *= -1;
-	}
+	float brickRightEdge = brick.x + brick.width / 2;
+	float brickLeftEdge = brick.x - brick.width / 2;
+	float brickTopEdge = brick.y + brick.height / 2;
+	float brickBottomEdge = brick.y - brick.height / 2;
 
-	if (ball.x + ball.width / 2 >= GetScreenWidth())
-	{
-		ball.dirX *= -1;
-	}
+	float ballRightEdge = ball.x + ball.width / 2;
+	float ballLeftEdge = ball.x - ball.width / 2;
+	float ballTopEdge = ball.y + ball.height / 2;
+	float ballBottomEdge = ball.y - ball.height / 2;
 
-	if (ball.x - ball.width / 2 <= 0)
+	return (brickRightEdge >= ballLeftEdge &&
+		brickLeftEdge <= ballRightEdge &&
+		brickTopEdge >= ballBottomEdge &&
+		brickBottomEdge <= ballTopEdge &&
+		!brick.isBroken);
+}
+
+void BallBrickChangeDirection(Ball& ball, Brick bricks[], int numBricks) 
+{
+	for (int i = 0; i < numBricks; i++)
 	{
-		ball.dirX *= -1;
+		float brickRightEdge = bricks[i].x + bricks[i].width / 2;
+		float brickLeftEdge = bricks[i].x - bricks[i].width / 2;
+		float brickTopEdge = bricks[i].y + bricks[i].height / 2;
+		float brickBottomEdge = bricks[i].y - bricks[i].height / 2;
+
+		float ballRightEdge = ball.x + ball.width / 2;
+		float ballLeftEdge = ball.x - ball.width / 2;
+		float ballTopEdge = ball.y + ball.height / 2;
+		float ballBottomEdge = ball.y - ball.height / 2;
+
+		if (BallBrickCollision(bricks[i], ball))
+		{
+			if (ballBottomEdge < brickBottomEdge && ball.x < brickRightEdge && ball.x > brickLeftEdge)
+			{
+				ball.y = brickBottomEdge - ball.height / 2;
+				if (ball.dirY > 0)
+					ball.dirY *= -1;
+			}
+			else if (ballTopEdge > brickTopEdge && ball.x < brickRightEdge && ball.x > brickLeftEdge)
+			{
+				ball.y = brickTopEdge + ball.height / 2;
+				if (ball.dirY < 0)
+					ball.dirY *= -1;
+			}
+			else if (ballRightEdge > brickRightEdge && ball.y < brickTopEdge && ball.y > brickBottomEdge)
+			{
+				ball.x = brickRightEdge + ball.width / 2;
+				if (ball.dirX < 0)
+					ball.dirX *= -1;
+			}
+			else if (brickLeftEdge < brickLeftEdge && ball.y < brickTopEdge && ball.y > brickBottomEdge)
+			{
+				ball.x = brickLeftEdge - ball.width / 2;
+				if (ball.dirX > 0)
+					ball.dirX *= -1;
+			}
+			else
+			{
+				if (ballBottomEdge < brickBottomEdge && ball.dirY > 0)
+				{
+					ball.y = brickBottomEdge - ball.height / 2;
+					ball.dirY *= -1;
+				}
+				else if (ballTopEdge < brickTopEdge && ball.dirY < 0)
+				{
+					ball.y = brickTopEdge + ball.height / 2;
+					ball.dirY *= -1;
+				}
+			}
+
+			bricks[i].isBroken = true;
+		}
 	}
 }
 
@@ -132,6 +191,7 @@ void UpdateGame()
 	BallMovement(ball);
 	BallScreenCollision(ball);
 	BounceDirection(player, ball);
+	BallBrickChangeDirection(ball, bricks, TOTAL_BRICKS);
 	RestLives(player, ball);
 }
 

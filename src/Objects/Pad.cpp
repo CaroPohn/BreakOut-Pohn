@@ -2,7 +2,7 @@
 #include "sl.h"
 #include "Game/Screen.h"
 
-int padTexture;
+static int padTexture;
 
 void InitPad(Pad& player, double width, double height)
 {
@@ -16,6 +16,30 @@ void InitPad(Pad& player, double width, double height)
 	player.speed = 1100.0f;
 	player.lives = 3;
 }
+
+void MovePadRight(Pad& player)
+{
+	if (slGetKey(SL_KEY_RIGHT)) player.x += player.speed * slGetDeltaTime();
+}
+
+void MovePadLeft(Pad& player)
+{
+	if (slGetKey(SL_KEY_LEFT)) player.x -= player.speed * slGetDeltaTime();
+}
+
+void PadScreenCollision(Pad& player)
+{
+	if (player.x - player.width / 2 <= 0)
+	{
+		player.x = 0 + player.width / 2;
+	}
+
+	if (player.x + player.width / 2 >= GetScreenWidth())
+	{
+		player.x = GetScreenWidth() - player.width / 2;
+	}
+}
+
 
 void DrawPad(Pad player)
 {
