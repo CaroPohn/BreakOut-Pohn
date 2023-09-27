@@ -26,6 +26,7 @@
     <ClCompile Include="..\src\Game\Screen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Objects\Ball.cpp" />
+    <ClCompile Include="..\src\Objects\Brick.cpp" />
     <ClCompile Include="..\src\Objects\Button.cpp" />
     <ClCompile Include="..\src\Objects\Pad.cpp" />
   </ItemGroup>

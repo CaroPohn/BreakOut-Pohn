@@ -1,6 +1,7 @@
 #include "Play.h"
 #include "Screen.h"
 #include "Game/Pause.h"
+#include "Objects/Brick.h"
 #include <iostream>
 #include "sl.h"
 
@@ -8,6 +9,8 @@ int backGameTexture;
 static Pad player;
 static Ball ball;
 static Pause pause;
+const int TOTAL_BRICKS = 49;
+Brick bricks[TOTAL_BRICKS];
 static bool isPaused = false;
 
 void InitGame()
@@ -20,6 +23,7 @@ void InitGame()
 	InitPad(player, playerWidth, playerHeigth);
 	InitPause(pause);
 	InitBall(ball);
+	FillBrickArray(bricks);
 }
 
 void CheckInput(Pad& player, bool& isPaused)
@@ -38,6 +42,7 @@ void DrawGame()
 	slSprite(backGameTexture, GetScreenWidth() / 2, GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight());
 	DrawPad(player);
 	DrawBall(ball);
+	DrawBricks(bricks, TOTAL_BRICKS);
 }
 
 void PadScreenCollision(Pad& player)
