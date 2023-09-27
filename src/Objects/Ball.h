@@ -8,7 +8,7 @@ struct Ball
 	double y;
 	double width;
 	double height;
-	const float DEFAULT_SPEED = 500.0f;
+	const float DEFAULT_SPEED = 800.0f;
 	float speed;
 	float dirX;
 	float dirY;

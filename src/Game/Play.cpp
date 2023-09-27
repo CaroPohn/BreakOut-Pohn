@@ -46,7 +46,6 @@ void CheckInput(Pad& player, bool& isPaused)
 	{
 		isPaused = !isPaused;
 	}
-
 }
 
 void DrawGame()
@@ -84,16 +83,15 @@ void BounceDirection(Pad player, Ball& ball)
 			ball.y += player.y + player.height / 2 - ball.y + ball.height / 2;
 		}
 
-		if(ball.speed < 600.0f)
+		if (ball.speed < 600.0f)
 			ball.speed *= 1.1f;
-		else
-			ball.speed *= 1.0f;
-
-		ball.dirY *= -1;
 
 		float xCollisionPoint = (ball.x + ball.width / 2 - player.x) / player.width;
-		float amplitude = 3.5f;
+		float amplitude = 1.5f;
+
 		ball.dirX = std::sinf(xCollisionPoint) * amplitude;
+		ball.dirY = 1.0f - abs(ball.dirX);
+
 	}
 }
 
