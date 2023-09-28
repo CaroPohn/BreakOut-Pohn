@@ -19,11 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Game\Credits.cpp" />
+    <ClCompile Include="..\src\Game\LoseScreen.cpp" />
     <ClCompile Include="..\src\Game\Menu.cpp" />
     <ClCompile Include="..\src\Game\Pause.cpp" />
     <ClCompile Include="..\src\Game\Play.cpp" />
     <ClCompile Include="..\src\Game\ProgramLoop.cpp" />
+    <ClCompile Include="..\src\Game\Rules.cpp" />
     <ClCompile Include="..\src\Game\Screen.cpp" />
+    <ClCompile Include="..\src\Game\WinScreen.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Objects\Ball.cpp" />
     <ClCompile Include="..\src\Objects\Brick.cpp" />
@@ -31,13 +35,17 @@
     <ClCompile Include="..\src\Objects\Pad.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\Game\Credits.h" />
+    <ClInclude Include="..\src\Game\LoseScreen.h" />
     <ClInclude Include="..\src\Game\Menu.h" />
     <ClInclude Include="..\src\Game\Pause.h" />
     <ClInclude Include="..\src\Game\Play.h" />
     <ClInclude Include="..\src\Game\ProgramLoop.h" />
+    <ClInclude Include="..\src\Game\Rules.h" />
     <ClInclude Include="..\src\Game\Scenes.h" />
     <ClInclude Include="..\src\Game\Screen.h" />
     <ClInclude Include="..\src\Game\Utilities.h" />
+    <ClInclude Include="..\src\Game\WinScreen.h" />
     <ClInclude Include="..\src\Objects\Ball.h" />
     <ClInclude Include="..\src\Objects\Brick.h" />
     <ClInclude Include="..\src\Objects\Button.h" />
@@ -139,11 +147,13 @@ xcopy /y "$(ProjectDir)assets" "$(OutDir)assets"</Command>
       <AdditionalIncludeDirectories>$(SolutionDir)src;$(SolutionDir)lib\sigil-vc2015\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\sigil-vc2015\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sigil.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -153,7 +163,7 @@ xcopy /y "$(ProjectDir)assets" "$(OutDir)assets"</Command>
       <Command>xcopy /y "$(SolutionDir)lib\sigil-vc2015\dll" "$(OutDir)"
 cd "$(OutDir)"
 md "assets"
-xcopy /y "$(SolutionDir)assets" "$(OutDir)assets"</Command>
+xcopy /y "$(ProjectDir)assets" "$(OutDir)assets"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -9,6 +9,8 @@ struct Pad
 	double height;
 	float speed;
 	int lives;
+	bool isAlive;
+	bool playerWin;
 };
 
 void InitPad(Pad& player, double width, double height);

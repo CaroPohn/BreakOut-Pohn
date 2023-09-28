@@ -15,6 +15,8 @@ void InitPad(Pad& player, double width, double height)
 	player.height = height;
 	player.speed = 1100.0f;
 	player.lives = 3;
+	player.isAlive = true;
+	player.playerWin = false;
 }
 
 void MovePadRight(Pad& player)

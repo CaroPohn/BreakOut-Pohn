@@ -2,6 +2,10 @@
 #include "Screen.h"
 #include "Menu.h"
 #include "Game/Play.h"
+#include "WinScreen.h"
+#include "LoseScreen.h"
+#include "Rules.h"
+#include "Credits.h"
 #include <iostream>
 
 static Scenes scene;
@@ -31,12 +35,20 @@ void GameLoop()
 			RunGame(scene, isNewScene);
 			break;
 
+		case Scenes::Win:
+			RunWinScreen(scene, isNewScene);
+			break;
+
+		case Scenes::Lose:
+			RunLoseScreen(scene, isNewScene);
+			break;
+
 		case Scenes::Rules:
-			
+			RunRules(scene, isNewScene);
 			break;
 
 		case Scenes::Credits:
-
+			RunCredits(scene, isNewScene);
 			break;
 
 		case Scenes::Exit:

@@ -5,16 +5,19 @@
 #include <iostream>
 #include "sl.h"
 
-int backGameTexture;
+static int backGameTexture;
+static int livesTexture;
 static Pad player;
 static Ball ball;
 static Pause pause;
 const int TOTAL_BRICKS = 49;
 Brick bricks[TOTAL_BRICKS];
 static bool isPaused = false;
+static int bricksBroken = 0;
 
 void InitGame();
 void CheckInput(Pad& player, bool& isPaused);
+void DrawLives(Pad player);
 void DrawGame();
 void PadScreenCollision(Pad& player);
 bool BallPadCollision(Pad player, Ball ball);
@@ -22,14 +25,16 @@ void BounceDirection(Pad player, Ball& ball);
 bool BallBrickCollision(Brick brick, Ball ball);
 void BallBrickChangeDirection(Ball& ball, Brick bricks[], int numBricks);
 void RestLives(Pad& player, Ball& ball);
-void UpdateGame();
+void UpdateGame(Scenes& scene);
 
 void InitGame()
 {
 	backGameTexture = slLoadTexture("assets/gameback.png");
+	livesTexture = slLoadTexture("assets/heart.png");
 
 	double playerWidth = 230;
 	double playerHeigth = 30;
+	bricksBroken = 0;
 
 	InitPad(player, playerWidth, playerHeigth);
 	InitPause(pause);
@@ -48,12 +53,28 @@ void CheckInput(Pad& player, bool& isPaused)
 	}
 }
 
+void DrawLives(Pad player)
+{
+	double distance = 25.0;
+	double livesX = 45.0;
+	double livesY = GetScreenHeight() - distance;
+	double livesWidth = 45.0;
+	double livesHeight = 45.0;
+
+	for (int i = 0; i < player.lives; i++)
+	{
+		slSprite(livesTexture, livesX, livesY, livesWidth, livesHeight);
+		livesX += livesWidth / 2 + distance;
+	}
+}
+
 void DrawGame()
 {
 	slSprite(backGameTexture, GetScreenWidth() / 2, GetScreenHeight() / 2, GetScreenWidth(), GetScreenHeight());
 	DrawPad(player);
 	DrawBall(ball);
 	DrawBricks(bricks, TOTAL_BRICKS);
+	DrawLives(player);
 }
 
 bool BallPadCollision(Pad player, Ball ball)
@@ -169,6 +190,13 @@ void BallBrickChangeDirection(Ball& ball, Brick bricks[], int numBricks)
 			}
 
 			bricks[i].isBroken = true;
+			bricksBroken++;
+			if (bricksBroken == TOTAL_BRICKS)
+			{
+				player.playerWin = true;
+			}
+
+			break;
 		}
 	}
 }
@@ -180,9 +208,14 @@ void RestLives(Pad& player, Ball& ball)
 		player.lives -= 1;
 		ResetBall(ball, player);
 	}
+
+	if (player.lives <= 0)
+	{
+		player.isAlive = false;
+	}
 }
 
-void UpdateGame()
+void UpdateGame(Scenes& scene)
 {
 	CheckInput(player, isPaused);
 	PadScreenCollision(player);
@@ -191,6 +224,16 @@ void UpdateGame()
 	BounceDirection(player, ball);
 	BallBrickChangeDirection(ball, bricks, TOTAL_BRICKS);
 	RestLives(player, ball);
+
+	if (player.playerWin)
+	{
+		scene = Scenes::Win;
+	}
+
+	if (!player.isAlive)
+	{
+		scene = Scenes::Lose;
+	}
 }
 
 void RunGame(Scenes& scene, bool isNewScene)
@@ -203,7 +246,7 @@ void RunGame(Scenes& scene, bool isNewScene)
 
 	if (!isPaused)
 	{
-		UpdateGame();
+		UpdateGame(scene);
 	}
 
 	DrawGame();
